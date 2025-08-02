@@ -4,6 +4,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { LocalAuthGuard } from './guards/local-auth/local-auth.guard';
 import { RefreshAuthGuard } from './guards/refresh-auth/refresh-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard';
+import { IS_PUBLIC, Public } from './decorators/public.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -14,6 +15,7 @@ export class AuthController {
   // @UseGuards(AuthGuard("local-user"))
   @UseGuards(LocalAuthGuard)
   @Post('login')
+  @Public()
   async login(@Request() req) {
     return this.authService.login(req.user.id);
   }

@@ -1,10 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, SetMetadata } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
+import { Role } from 'src/auth/types/enums/role.enum';
+import { Roles } from 'src/auth/decorators/role.decorator';
+import { RolesGuard } from 'src/auth/guards/roles/roles.guard';
 
+
+@Roles(Role.EDITOR)
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) { }
@@ -36,6 +41,14 @@ export class UserController {
     return this.userService.update(+id, updateUserDto);
   }
 
+
+
+
+
+  // @SetMetadata("role" , [Role.ADMIN ,Role.EDITOR])
+  @Roles(Role.ADMIN)
+  // @UseGuards(RolesGuard)
+  // @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);

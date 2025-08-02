@@ -1,6 +1,7 @@
 import { BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Product } from './product.entity'
 import * as bcrypt from 'bcrypt'
+import { Role } from "src/auth/types/enums/role.enum";
 
 @Entity()
 export class User {
@@ -18,6 +19,10 @@ export class User {
 
     @Column({ default: "" })
     hashRefreshToken?: string
+
+
+    @Column({ type: "enum", enum: Role, default: Role.USER })
+    role: Role
 
 
     @Column({ default: "abcd" })

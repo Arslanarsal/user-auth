@@ -39,10 +39,10 @@ export class UserService {
       where: {
         id: id
       },
-      select: ["firsname", "lastname", "email" , "hashRefreshToken"]
+      select: [  "id","firsname", "lastname", "email" , "hashRefreshToken" , "role"]
     });
   }
-
+ 
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
