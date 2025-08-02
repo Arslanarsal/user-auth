@@ -9,9 +9,14 @@ import { promises } from 'dns';
 @Injectable()
 export class UserService {
 
-  constructor(@InjectRepository(User) private userRepo: Repository<User>) {
+  constructor(@InjectRepository(User) private userRepo: Repository<User>) { }
 
+
+  updateRefreshToken(userId: number, hashRefreshToken: string) {
+
+    return this.userRepo.update(userId, { hashRefreshToken });
   }
+
   async create(createUserDto: CreateUserDto) {
     const user = await this.userRepo.create(createUserDto);
     return this.userRepo.save(user);
@@ -34,7 +39,7 @@ export class UserService {
       where: {
         id: id
       },
-      select: ["firsname", "lastname", "email"]
+      select: ["firsname", "lastname", "email" , "hashRefreshToken"]
     });
   }
 

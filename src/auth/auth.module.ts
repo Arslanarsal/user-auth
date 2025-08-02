@@ -10,6 +10,7 @@ import jwtConfig from './config/jwt.config';
 import { ConfigModule } from '@nestjs/config';
 import { jwtStrategy } from './strategies/jwt.strategy';
 import refreshJwtConfig from './config/refresh-jwt.config';
+import { refreshJwtStrategy } from './strategies/refresh.strategy';
 
 @Module({
   imports: [
@@ -19,6 +20,6 @@ import refreshJwtConfig from './config/refresh-jwt.config';
     ConfigModule.forFeature(refreshJwtConfig)
   ],
   controllers: [AuthController],
-  providers: [AuthService, UserService, localStratg , jwtStrategy],
+  providers: [AuthService, UserService, localStratg , jwtStrategy , refreshJwtStrategy],
 })
 export class AuthModule { }

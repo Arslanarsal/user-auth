@@ -16,7 +16,11 @@ export class User {
     @Column()
     email: string
 
-    @Column({default : "abcd"})
+    @Column({ default: "" })
+    hashRefreshToken?: string
+
+
+    @Column({ default: "abcd" })
     password: string
 
     @CreateDateColumn()

@@ -3,5 +3,4 @@ import { AuthGuard } from '@nestjs/passport';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class LocalAuthGuard extends AuthGuard("local-user"){}
-
+export class RefreshAuthGuard extends AuthGuard("refresh-jwt") { }
